@@ -1,0 +1,94 @@
+@font-face {
+  font-family: 'BinggraeSamanco-Bold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/BinggraeSamanco-Bold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App {  
+  background : linear-gradient(to right, rgb(255,209,148), rgb(128,209,232));
+  width : 100vh;
+  height : 100vh;
+
+}
+
+.container_main {
+  float : left;
+  margin-top: 5vh;
+  margin-left : 16.5%;
+  margin-bottom: 5vh;
+  width : 83%;
+  min-height: 90vh;
+  background-color: white;
+  border-radius: 10px;
+
+
+  -webkit-animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+
+
+}
+
+
+
+ul {
+  list-style: none;
+}
+
+
+.logo {
+  font-family: BinggraeSamanco-Bold;
+}
+
+
+.side_nav{
+  position: fixed;
+  float:left;
+  margin-top: 5vh;
+  height: 90vh;
+  width: 15%;
+  background-color: white;
+  border-radius: 10px;
+
+  -webkit-animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+
+
+}
+
+@-webkit-keyframes scale-in-center {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes scale-in-center {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+}
+
+ul {
+  list-style: none;
+}
