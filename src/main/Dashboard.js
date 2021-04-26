@@ -7,6 +7,7 @@
 
 
 import React from "react"
+import { Container, Row } from "react-bootstrap";
 import { Route } from "react-router";
 import Chart from "./chart/Chart"
 
@@ -14,14 +15,18 @@ import Chart from "./chart/Chart"
 function Dashboard({ session }) {
 
     return (
-        <div>
+        <Container>
+            <Row className="justify-content-md-center">
+                <div>
 
-            <h1>대시보드 메인페이지 </h1>
+                    <h1>대시보드 메인페이지 </h1>
 
-            
-            <Chart />
+                    
+                    <Chart />
 
-        </div>
+                </div>
+            </Row>
+        </Container>
     )
 
 };

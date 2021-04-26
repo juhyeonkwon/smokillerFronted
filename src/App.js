@@ -77,20 +77,20 @@ function App() {
         <ul>
             <li>
                 
-                <Link to="/"><BiChalkboard />  Home</Link>        
+                <Link to="/"><BiChalkboard /> Home</Link>        
             </li>
 
             <li>
                 
-                <Link to="/photolist"><BiPhotoAlbum /> photolist</Link>      
+                <Link to="/photolist"><BiPhotoAlbum /> Photolist</Link>      
             </li>
 
             <li>
-                <Link to="/signup"><BiUser /> signup</Link>      
+                <Link to="/signup"><BiUser /> Signup</Link>      
             </li>
 
             <li>
-                <a href="" onClick={logout}><BiLogOut /> logout</a>      
+                <a href="" onClick={logout}><BiLogOut /> Logout</a>      
             </li>
         </ul>
     </div>

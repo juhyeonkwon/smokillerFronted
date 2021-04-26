@@ -24,6 +24,7 @@ function Photolist() {
     
     //page를 받아와 리스트 값을 가져옵니다..
     const fetchLists = async (page) => {
+        
         axios.post('/api/photo/list', {page : page}, {withCredentials : true}).then(response => {
 
             setStates({
@@ -32,6 +33,16 @@ function Photolist() {
         }).catch(err => {
             console.log(err);
         })
+
+        /*
+
+        axios.post('/api/boardtest/list.json', {withCredentials : true}).then(response => {
+            console.log(response.data.list);
+
+        })
+
+        */
+
     }
 
     const setClick = () => {
