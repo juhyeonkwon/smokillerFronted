@@ -1,25 +1,37 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Container, Form, Row, Button } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image'
 import './css/PhotoDetail.css'
 
-function PhotoDetail( { data, setClick } ) {
+function PhotoDetail( { data, setClick, user_info } ) {
+   
+    const [isFinished, setIsFinished] = useState(false);
 
     useEffect(() => {
+        
+        if(data.state == "yet") {
+            setIsFinished(false);
+        } else {
+            setIsFinished(true);
+        }        
+        
         return () => {
+           setIsFinished('');
         }
-    })
+    },[isFinished])
+
+  
 
     const src = "./smoke.png"
 
-
+    
     return ( 
      <Container>
         <Row className="justify-content-md-center">
 
             <Col md="auto" className="col"> 
             
-                <Image className="detailImg"src="http://127.0.0.1:3333/images/smoke.png" fluid  rounded/>
+                <Image className="detailImg" src="http://127.0.0.1:3333/images/smoke.png" fluid  rounded/>
                 <br />
                 <Col md="auto">
 
@@ -37,14 +49,15 @@ function PhotoDetail( { data, setClick } ) {
                 <Form.Control type="text" placeholder={data.state} readOnly className="inputText" />
 
 
-                <Form.Label>처리자</Form.Label>         
-                <Form.Control type="text" placeholder={data.user_id} readOnly className="inputText" />
+                <Form.Label>처리자</Form.Label>                     
+                <Form.Control type="text" placeholder={user_info.user_id} readOnly className="inputText" />
+                
                 </Col>
 
                 <Col xl>
 
-                <Form.Label>시간</Form.Label>
-                <Form.Control type="text" placeholder={data.time} readOnly className="inputText" />
+                <Form.Label>처리 시간</Form.Label>
+                <Form.Control type="date" placeholder={data.time} readOnly className="inputText" />
 
 
                 <Form.Label>위반여부</Form.Label>
@@ -63,7 +76,12 @@ function PhotoDetail( { data, setClick } ) {
 
                 <Button onClick={setClick}> 돌아가기 </Button>
                 
+                {!isFinished ?
                 <Button onClick={setClick}> 처리하기 </Button>
+                :
+                <Button onClick={setClick}> 수정하기 </Button>
+                }
+                
 
                 </Col>
 

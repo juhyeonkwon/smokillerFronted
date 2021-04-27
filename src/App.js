@@ -6,7 +6,7 @@
 */
 
 //
-import react,{useRef, useState} from 'react'
+import React,{useRef, useState} from 'react'
 import './App.css';
 import { Link, Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -31,25 +31,28 @@ function App() {
   
   //로그인 여부를 확인하기위한 state값입니다... isLogin, user_id, name, email값을 받아와야합니다.
   const [state, setStates]  = useState({ 
-      isLogin : false, 
-      name : 'log',
+      isLogin : false,
+      user_id : '',
+      name : '',
     });
-
 
   const {isLogin, name} = state;
 
 
   //로그인을 하게 된다면 state값에 세션에 대한 정보를 저장합니다. 
-  const setLogin = () => {
+  const setLogin = (name) => {
     setStates({
-      ...state, isLogin : !isLogin
-    })
+      isLogin : true,
+      user_id : 5,
+      name : name
+    });
   }
 
   //로그아웃을 하게되면 값들을 초기화시키고, 세션을 해제합니다.
   const logout = () => {
     setStates({
       isLogin : false,
+      user_id : '',
       name : ''
     });
 
@@ -69,7 +72,7 @@ function App() {
     {/*로그인을 하게되면 isLogin의 값이 true가 되며, 사이드 네비게이션과, 메인 화면을 보여줍니다. 
       사이드 네비입니다.*/}
     {isLogin &&
-      <div className="side_nav">
+    <div className="side_nav">
 
     <div className="logo">Smokiller</div>
   
@@ -129,7 +132,7 @@ function App() {
       <Route 
         path="/photolist" 
         exact={true}
-        render={() => <Photolist setLogin={setLogin} />} />
+        render={() => <Photolist  user_info={state} />} />
 
       </Switch>
 
@@ -137,9 +140,6 @@ function App() {
       
     </div>
   }
-    
-
-
     </Container>
   );
 }

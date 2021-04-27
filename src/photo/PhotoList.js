@@ -20,7 +20,7 @@ import { Button } from "react-bootstrap";
 
 
 
-function Photolist() { 
+function Photolist({ user_info }) { 
     
     //page를 받아와 리스트 값을 가져옵니다..
     const fetchLists = async (page) => {
@@ -74,9 +74,7 @@ function Photolist() {
        
 
         fetchLists(states.currentPage);
-
         return () => {
-
 
         }
     }, [])
@@ -107,7 +105,6 @@ function Photolist() {
         text: 'State',
 
     }];
-
 
 
     // row를 클릭할 시 일어나는 이벤트
@@ -155,7 +152,7 @@ function Photolist() {
             {isClicked &&
             <div>
 
-                <PhotoDetail data={detailData} setClick={setClick} />
+                <PhotoDetail data={detailData} setClick={setClick} user_info={user_info} />
 
             </div>
             }
