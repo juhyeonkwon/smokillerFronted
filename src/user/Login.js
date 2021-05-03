@@ -33,7 +33,7 @@ function Login( {setLogin} ) {
 
       
         //axios로 ajax 통신을 진행합니다. withCredentials : true 값을 속성으로 줘야합니당..      
-       await axios.post('/api/login', {email : email, password : cryptoPw}, 
+       await axios.post('/api/login', {id : email, password : cryptoPw}, 
                     {withCredentials : true}).then(response => {
 
                         setLogin(response.data.name);       

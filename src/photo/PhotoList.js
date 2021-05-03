@@ -27,6 +27,14 @@ function Photolist({ user_info }) {
         
         axios.post('/api/photo/list', {page : page}, {withCredentials : true}).then(response => {
 
+            response.data.map(data => {
+                if(data.process === 0) {
+                    data.process = 'yet'
+                } else {
+                    data.process = 'done'
+                }
+            })
+
             setStates({
                 ...states, data : response.data
             });
@@ -47,8 +55,9 @@ function Photolist({ user_info }) {
 
     const setClick = () => {
         setRows({
-            ...rows,
-            isClicked : !isClicked
+            clickedRow : '',
+            isClicked : !isClicked,
+            detailData : '',
         })
     }
 
@@ -82,7 +91,7 @@ function Photolist({ user_info }) {
     //table 세팅입니다.
     const columns = [
     {
-      dataField: 'id',
+      dataField: 'idx',
       text: 'No',
       headerStyle: (colum, colIndex) => {
         return { width: '10%', textAlign: 'center'};
@@ -92,16 +101,12 @@ function Photolist({ user_info }) {
       }
     }, 
     {
-      dataField: 'name',
-      text: 'Name',
-    },
-    {
       dataField: 'time',
       text: 'Time',
 
     },
     {
-        dataField:'state',
+        dataField:'process',
         text: 'State',
 
     }];
@@ -111,16 +116,12 @@ function Photolist({ user_info }) {
     // row를 클릭하면 해당 row의 상세정보를 ajax통신으로 값을 받아와서 사용자에게 보여준다..
     const rowEvents = {
         onClick: (e, row, rowIndex) => {            
-                setRows({
-                });
-
-                axios.post('/api/photo/detail', {id : row.id }, {withCredentials : true}).then(response => {
-                    console.log(response.data)
+                axios.post('/api/photo/detail', {id : row.idx, process : row.process }, {withCredentials : true}).then(response => {
 
                     setRows({
                         clickedRow : row,
                         isClicked : true,
-                        detailData : response.data
+                        detailData : response.data[0]
                     })
                     
                 }).catch(err => {
@@ -130,6 +131,8 @@ function Photolist({ user_info }) {
 
         }
       };
+
+
     
 
 
@@ -139,12 +142,13 @@ function Photolist({ user_info }) {
             {!isClicked &&
             <BootstrapTable 
                 key={data.id}
-                keyField='id' 
+                keyField='idx' 
                 data={ data } 
                 columns={ columns }
                 rowEvents = { rowEvents } 
                 bordered={ false }
                 hover={true}
+                
                 
             />
             }
@@ -152,7 +156,7 @@ function Photolist({ user_info }) {
             {isClicked &&
             <div>
 
-                <PhotoDetail data={detailData} setClick={setClick} user_info={user_info} />
+                <PhotoDetail data={detailData} setClick={setClick} user_info={user_info} fetchLists={fetchLists}/>
 
             </div>
             }

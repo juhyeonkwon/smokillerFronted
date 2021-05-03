@@ -43,7 +43,7 @@ function App() {
   const setLogin = (name) => {
     setStates({
       isLogin : true,
-      user_id : 5,
+      user_id : 1,
       name : name
     });
   }
