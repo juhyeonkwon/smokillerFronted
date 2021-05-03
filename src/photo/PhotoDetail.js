@@ -1,3 +1,10 @@
+/* 
+*  /src/photo/PhotoDetail.js
+*  사진 클릭시 자세한 정보를 받아오는 컴포넌트
+*  날짜     : 21.03.14
+*  만든이   : 권주현
+*/
+
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Form, Row, Button } from 'react-bootstrap';

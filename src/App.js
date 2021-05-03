@@ -12,15 +12,14 @@ import { Link, Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { Container, Nav } from 'react-bootstrap';
-import {BiChalkboard, BiPhotoAlbum, BiUser, BiLogOut} from "react-icons/bi";
+import {BiChalkboard, BiPhotoAlbum, BiUser, BiLogOut, BiGroup} from "react-icons/bi";
 
 
 //각 컴포넌트들을 imprt 하는 코드들
 import Login from './user/Login';
 import Signup from './user/Signup';
+import UserList from './user/UserList';
 
-
-//main Container
 import Header from './main/Header'
 import Dashboard from './main/Dashboard';
 import Logout from './user/Logout';
@@ -48,18 +47,13 @@ function App() {
     });
   }
 
-  //로그아웃을 하게되면 값들을 초기화시키고, 세션을 해제합니다.
+  //로그아웃을 하게되면 값들을 초기화
   const logout = () => {
     setStates({
       isLogin : false,
       user_id : '',
       name : ''
     });
-
-    /*
-      세션을 해제를 요청하는 코드 
-
-    */
   }
 
   return (
@@ -91,7 +85,9 @@ function App() {
             <li>
                 <Link to="/signup"><BiUser /> Signup</Link>      
             </li>
-
+            <li>
+                <Link to="/userlist"><BiGroup /> UserList</Link>      
+            </li>
             <li>
                 <a href="" onClick={logout}><BiLogOut /> Logout</a>      
             </li>
@@ -134,7 +130,14 @@ function App() {
         exact={true}
         render={() => <Photolist  user_info={state} />} />
 
+      <Route
+        path="/userlist"
+        exact={true}
+        render={() => <UserList />} />
+
+
       </Switch>
+
 
 
       

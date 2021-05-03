@@ -117,7 +117,7 @@ function Photolist({ user_info }) {
     const rowEvents = {
         onClick: (e, row, rowIndex) => {            
                 axios.post('/api/photo/detail', {id : row.idx, process : row.process }, {withCredentials : true}).then(response => {
-
+                    console.log(response.data[0])
                     setRows({
                         clickedRow : row,
                         isClicked : true,
