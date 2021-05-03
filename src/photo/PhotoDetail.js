@@ -11,7 +11,7 @@ import { Col, Container, Form, Row, Button } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image'
 import './css/PhotoDetail.css'
 
-function PhotoDetail( { data, setClick, user_info, fetchLists } ) {
+function PhotoDetail( { data, setClick, user_info, fetchLists, handleHeader } ) {
    
     const [isFinished, setIsFinished] = useState(false);
 
@@ -84,6 +84,7 @@ function PhotoDetail( { data, setClick, user_info, fetchLists } ) {
             fetchLists();
             setIsFinished('');
             setClick();
+
         });
     }
 

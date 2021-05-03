@@ -1,0 +1,22 @@
+.dropdown {
+    float : right;
+    background-color: white;
+    color: black;
+    border: none;
+    padding-top: 0;
+    padding-left: 6px;
+    
+}
+
+.dropdown:hover {
+    background: none;
+    color : black
+}
+
+.dropdown::active {
+    background: none;
+}
+
+.item {
+    font-size: small;
+}

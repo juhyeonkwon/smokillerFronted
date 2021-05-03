@@ -56,6 +56,14 @@ function App() {
     });
   }
 
+  //헤더 정보
+
+  const [header, setHeader] = useState({
+    head : 'Smokiller',
+  })
+
+
+
   return (
 
 
@@ -74,12 +82,12 @@ function App() {
         <ul>
             <li>
                 
-                <Link to="/"><BiChalkboard /> Home</Link>        
+                <Link to="/" ><BiChalkboard /> Home</Link>        
             </li>
 
-            <li>
+            <li >
                 
-                <Link to="/photolist"><BiPhotoAlbum /> Photolist</Link>      
+                <Link to="/photolist" ><BiPhotoAlbum /> Photolist</Link>      
             </li>
 
             <li>
@@ -113,7 +121,7 @@ function App() {
     {isLogin &&
     <div className="container_main">   
 
-      <Header state={state}/>
+      <Header state={state} logout={logout}/>
       
 
 
@@ -128,7 +136,7 @@ function App() {
       <Route 
         path="/photolist" 
         exact={true}
-        render={() => <Photolist  user_info={state} />} />
+        render={() => <Photolist  user_info={state}/>} />
 
       <Route
         path="/userlist"

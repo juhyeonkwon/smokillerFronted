@@ -33,7 +33,7 @@ function UserList() {
 
 
     useEffect(() => {
-        
+
         fetchlist();
 
         return () => {
@@ -221,7 +221,7 @@ function UserList() {
         
 
 
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>Modify</Modal.Title>
         </Modal.Header>

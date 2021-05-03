@@ -81,7 +81,6 @@ function Photolist({ user_info }) {
     //useEffect해당 컴포넌트를 불러오면 axios 통신을 통해 리스트를 받아옵니당..
     useEffect(() => {
        
-
         fetchLists(states.currentPage);
         return () => {
 

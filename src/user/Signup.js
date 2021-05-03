@@ -5,7 +5,7 @@
 *  만든이   : 권주현
 */
 
-import React, { useState }  from 'react' 
+import React, { useEffect, useState }  from 'react' 
 import {Container, Row, Col, Form, Button, FormControl } from 'react-bootstrap'
 import sha256 from 'crypto-js/sha256';
 import axios from 'axios';
@@ -15,6 +15,7 @@ import axios from 'axios';
 
 
 function Signup() {
+  
 
     const [inputs, setInputs] = useState({
         id : '',
