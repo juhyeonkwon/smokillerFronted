@@ -79,7 +79,11 @@ function PhotoDetail( { data, setClick, user_info, fetchLists, handleHeader } ) 
         }
 
         axios.post('/api/photo/proceed', {photo_id : data.idx, user_id : user_info.user_id, smoking : smoke_data, comment : inputs.comment}, {withCredentials : true}).then(response => {
-
+            if(response.data === 1) {
+                alert('처리가 완료되었습니다.')
+            } else {
+                alert('에러가 발생했습니다.')
+            }
             console.log(response);
             fetchLists();
             setIsFinished('');
