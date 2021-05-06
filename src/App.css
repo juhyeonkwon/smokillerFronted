@@ -14,29 +14,50 @@
 }
 
 .App {  
-  background : linear-gradient(to right, rgb(255,209,148), rgb(128,209,232));
+  background : #eeeeee;
   width : 100vh;
   height : 100vh;
-
+  padding-left: 0;
 }
 
+/*전체를 감싸는 class*/
+.wrap {
+  background : #eeeeee;
+  padding : 0px;
+}
+
+/* 메인 */
 .container_main {
   float : left;
-  margin-top: 5vh;
-  margin-left : 16.5%;
-  margin-bottom: 5vh;
+  margin-top: 1vh;
+  margin-bottom: 2vh;
+  padding-top : 10px;
   width : 83%;
   min-height: 90vh;
   background-color: white;
   border-radius: 10px;
 
-
-  -webkit-animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-  animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-
-
 }
 
+
+.logo {
+  width : 100%
+}
+
+
+
+
+/* 사이드 네비게이션 css들 */
+.side_nav {
+  height: 100vh;
+  width: 15%;
+  background-color: white;
+  border-radius: 10px;
+  float : left;
+  position :fixed;
+  margin-right : 1%;
+
+}
 
 
 ul {
@@ -46,7 +67,10 @@ ul {
 
 ul > li {
   padding-top : 2vh;
-  font-size :medium
+  font-size : larger;
+  border-bottom : 1px solid #eeeeee;
+  padding-bottom : 10px;
+  margin-right: 20px;
 }
 
 ul > li > a {
@@ -58,49 +82,20 @@ ul > li > a:hover {
   color : rgba(0,0,0,.7)
 }
 
-
-.logo {
-  font-family: BinggraeSamanco-Bold;
-  font-size : large;
+ul > li > a:active {
+  text-decoration: none;
+  color : #37C56E;
 }
 
 
-.side_nav{
-  position: fixed;
-  float:left;
-  margin-top: 5vh;
-  height: 90vh;
-  width: 15%;
+
+/*사이드 네비 fixed라서 눈속임용 css */
+.void {
+  float : left;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  width : 15%;
   background-color: white;
-  border-radius: 10px;
+  margin-right : 0.7%;
 
-  -webkit-animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-
-
-}
-
-@-webkit-keyframes scale-in-center {
-  0% {
-    -webkit-transform: scale(0);
-            transform: scale(0);
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-    opacity: 1;
-  }
-}
-@keyframes scale-in-center {
-  0% {
-    -webkit-transform: scale(0);
-            transform: scale(0);
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-    opacity: 1;
-  }
 }

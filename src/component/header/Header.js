@@ -10,13 +10,20 @@ import {React, useEffect, useState} from 'react'
 import { Container, Row, Col, Form, Button, Modal, Navbar, Dropdown } from 'react-bootstrap';
 import { BiUserCircle } from 'react-icons/bi';
 import axios from 'axios';
-import './css/Header.css'
+import './Header.css'
 
 
 
 
 
 function Header( {state, head, logout} ) {
+
+    useEffect(() => {
+        console.log('헤더 리로드')
+        
+    }, )
+
+    const [title, setTitle] = useState('home');
 
     const [passwords, setPasswords] = useState({
         password : '',
@@ -58,24 +65,23 @@ function Header( {state, head, logout} ) {
     const handleShow = () => setShow(true);
 
     return (
-        <Navbar>
-            <Navbar.Brand >{head}</Navbar.Brand>
+        <Navbar className="nav">
+            <Navbar.Brand >환영합니다</Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
                 <Navbar.Text>
                 <BiUserCircle />
                 Signed in as: 
-                <Dropdown >
+                <Dropdown>
                     <Dropdown.Toggle  id="dropdown-basic" className="dropdown">
                              {state.name}
                     </Dropdown.Toggle>
 
-                    <Dropdown.Menu   
-                        align="right"
-                    >
-                        <Dropdown.Item href="#" className="item" onClick={handleShow}>정보수정</Dropdown.Item>
-                        <Dropdown.Item href="#" className="item" onClick={logout}>로그아웃</Dropdown.Item>
+                    <Dropdown.Menu align="right" >
+                        <Dropdown.Item className="item" onClick={handleShow}>정보수정</Dropdown.Item>
+                        <Dropdown.Item className="item" onClick={logout}>로그아웃</Dropdown.Item>
                     </Dropdown.Menu>
+
                 </Dropdown>
                 </Navbar.Text>
             </Navbar.Collapse>

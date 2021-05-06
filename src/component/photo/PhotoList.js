@@ -20,7 +20,7 @@ import { Button } from "react-bootstrap";
 
 
 
-function Photolist({ user_info }) { 
+function Photolist({ user_info, onClickMenu }) { 
     
     //page를 받아와 리스트 값을 가져옵니다..
     const fetchLists = async (page) => {
@@ -82,6 +82,7 @@ function Photolist({ user_info }) {
     useEffect(() => {
        
         fetchLists(states.currentPage);
+        onClickMenu('Photo')
         return () => {
 
         }
