@@ -41,7 +41,6 @@ function Signup() {
 
 
     const submit = () => {
-        console.log(inputs);
 
         if(password != password2) {
             alert('비밀번호가 일치하지 않습니다.')
@@ -64,9 +63,9 @@ function Signup() {
                 break;
         }
 
-        axios.post('/api/signup', {id : id, name : name, password : password, rank : access}, {withCredentials : true}).then(response => {
+        axios.post('/api/super_user/userInsert', {id : id, name : name, password : password, access : access}, {"Content-Type" : "application/json", withCredentials : true}).then(response => {
             console.log(response.data);
-            if(response.data === 1) {
+            if(response.data.success === 1) {
                 alert('관리자 등록이 완료되었습니다.')
             } else {
                 alert('에러가 발생했습니다.')

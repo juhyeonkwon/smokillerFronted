@@ -6,7 +6,7 @@
 */
 
 
-import React, { useState }  from 'react' 
+import React, { useEffect, useState }  from 'react' 
 import {Container, Row, Col, Form, Button} from 'react-bootstrap'
 import sha256 from 'crypto-js/sha256';
 import axios from 'axios';
@@ -19,6 +19,8 @@ function Login( {setLogin} ) {
 
     const {email, password} = inputs;
 
+   
+
     const onChange = function(e) {
         setInputs({
             ...inputs, [e.target.name] : e.target.value
@@ -29,14 +31,18 @@ function Login( {setLogin} ) {
 
         //패스워드는 암호화를 해서 서버에 전송해야 안전하기 때문에 
         //sha256으로 암호화를 한 후서버에 전송합니다
-        const cryptoPw = sha256(password).toString();
+        //const cryptoPw = sha256(password).toString();
 
       
         //axios로 ajax 통신을 진행합니다. withCredentials : true 값을 속성으로 줘야합니당..      
-       await axios.post('/api/login', {id : email, password : cryptoPw}, 
+       await axios.get('/api/user/login?id=' + email + "&password=" + password, 
                     {withCredentials : true}).then(response => {
-
-                        setLogin(response.data.name);       
+                        
+                    if(response.data.login === "success") {
+                        setLogin(response.data.name, response.data.idx);      
+                    } else {
+                        alert("로그인 정보를 다시 확인해 주세요.")
+                    }
 
         }).catch((err) => {
             console.log(err);

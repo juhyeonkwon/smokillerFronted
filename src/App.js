@@ -22,8 +22,8 @@ import UserList from './component/user/UserList';
 
 import Header from './component/header/Header'
 import Dashboard from './component/main/Dashboard';
-import Logout from './component/user/Logout';
 import Photolist from './component/photo/PhotoList';
+import Graph from './component/main/Graph'
 
 import logo from './smokiller.png'
 
@@ -38,11 +38,11 @@ function App() {
       name : '',
     });
 
-  const {isLogin, name} = state;
+  const {isLogin, name, user_id} = state;
 
 
-  //로그인을 하게 된다면 state값에 세션에 대한 정보를 저장합니다. 
-  const setLogin = (name) => {
+  //로그인을 하게 된다면 state값에 로컬스토리지에 대한 정보를 저장합니다. 
+  const setLogin = (name, user_id) => {
     setStates({
       isLogin : true,
       user_id : 1,
@@ -128,7 +128,7 @@ function App() {
           <Route 
             path="/" 
             exact={true}
-            render={() => <Dashboard setLogin={setLogin} />} />
+            render={() => <Graph setLogin={setLogin} />} />
             
           <Route path="/signup" exact={true} component={Signup} />
 

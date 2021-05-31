@@ -25,18 +25,18 @@ function Photolist({ user_info, onClickMenu }) {
     //page를 받아와 리스트 값을 가져옵니다..
     const fetchLists = async (page) => {
         
-        axios.post('/api/photo/list', {page : page}, {withCredentials : true}).then(response => {
-
-            response.data.map(data => {
-                if(data.process === 0) {
-                    data.process = 'yet'
+        axios.get('/api/photo/list.json', {page : page}, {withCredentials : true}).then(response => {
+            console.log(response.data.photolist)
+            response.data.photolist.map(photolist => {
+                if(photolist.process === 0) {
+                    photolist.process = 'yet'
                 } else {
-                    data.process = 'done'
+                    photolist.process = 'done'
                 }
             })
 
             setStates({
-                ...states, data : response.data
+                ...states, data : response.data.photolist
             });
         }).catch(err => {
             console.log(err);
@@ -116,12 +116,13 @@ function Photolist({ user_info, onClickMenu }) {
     // row를 클릭하면 해당 row의 상세정보를 ajax통신으로 값을 받아와서 사용자에게 보여준다..
     const rowEvents = {
         onClick: (e, row, rowIndex) => {            
-                axios.post('/api/photo/detail', {id : row.idx, process : row.process }, {withCredentials : true}).then(response => {
-                    console.log(response.data[0])
+                console.log(row.idx);
+                axios.get('/api/photo/detail?idx=' + row.idx, {withCredentials : true}).then(response => {
+                    console.log(response.data)
                     setRows({
                         clickedRow : row,
                         isClicked : true,
-                        detailData : response.data[0]
+                        detailData : response.data.photo
                     })
                     
                 }).catch(err => {

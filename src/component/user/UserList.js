@@ -20,11 +20,12 @@ function UserList() {
 
     const fetchlist = async function() {
         
-        await axios.post('/api/userlist', {withCredentials : true}).then(response => {
+        await axios.get('/api/super_user/user_list', {withCredentials : true}).then(response => {
 
-            setStates({
-                data : response.data,
-            });
+            console.log(response.data.userlist);
+             setStates({
+                 data : response.data.userlist,
+             });
         
         }).catch(err => {
             console.log(err);
@@ -161,15 +162,13 @@ function UserList() {
         }
 
 
-        axios.post('/api/userlist/modify', {idx : rows.idx, access : param}, {withCredentials : true}).then(response => {
+        axios.post('/api/super_user/modify_rank', {idx : rows.idx, access : param}, {withCredentials : true}).then(response => {
             
-            if(response.data === 1) {
+            if(response.data.success === 1) {
                 alert('수정을 완료했습니다.')
             } else {
                 alert('오류가 발생했습니다.')
-            }
-
-            
+            }  
 
             handleClose();
 
@@ -184,8 +183,8 @@ function UserList() {
     const deleteUser = () => {
 
         if(window.confirm('삭제하시겠습니까?')) {
-            axios.post('/api/userlist/delete', {idx : idx}, {withCredentials : true}).then(response => {
-                if(response.data === 1) {
+            axios.get('/api/super_user/delete?idx=' + idx, {withCredentials : true}).then(response => {
+                if(response.data.success === 1) {
 
                     window.alert('삭제를 완료했습니다.')
                     handleClose();

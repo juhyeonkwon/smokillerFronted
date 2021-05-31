@@ -21,7 +21,7 @@ function Header( {state, head, logout} ) {
     useEffect(() => {
         console.log('헤더 리로드')
         
-    }, )
+    }, [])
 
     const [title, setTitle] = useState('home');
 
@@ -48,8 +48,9 @@ function Header( {state, head, logout} ) {
             return ;
         }
 
-        axios.post('/api/modify_pw', { idx : state.user_id, password : password}, {withCredentials : true} ).then(response => {
-            if(response.data === 1) {
+        axios.post('/api/user/modify_pw', { idx : state.user_id, password : password}, {withCredentials : true} ).then(response => {
+            console.log(response.data);
+            if(response.data.success === 1) {
                 alert('수정을 완료했습니다.')
                 handleClose();
             } else {
