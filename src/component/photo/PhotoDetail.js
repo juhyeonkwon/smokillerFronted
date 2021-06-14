@@ -7,7 +7,7 @@
 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Form, Row, Button } from 'react-bootstrap';
+import { Col, Container, Form, Row, Button, Modal } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image'
 import './css/PhotoDetail.css'
 
@@ -44,15 +44,17 @@ function PhotoDetail( { data, setClick, user_info, fetchLists, handleHeader } ) 
             });      
         }     
 
-        if(data.smoking === 0) {
-            setInputs({
-                smoking : 'NO',
-            });
-        } else if(data.smoking === 1) {
-            setInputs({
-                smoking : 'YES',
-            }) 
-        }   
+        if(data.process == 1) {
+            if(data.smoking == 0) {
+                setInputs({
+                    smoking : 'NO',
+                });
+            } else if(data.smoking == 1) {
+                setInputs({
+                    smoking : 'YES',
+                }) 
+            }   
+        }
         
         
         return () => {
@@ -61,7 +63,7 @@ function PhotoDetail( { data, setClick, user_info, fetchLists, handleHeader } ) 
             smoking : 'YES',
             process : 'YES',
             comment : '',
-           })
+           });
         }
     },[isFinished]);
   
@@ -72,19 +74,24 @@ function PhotoDetail( { data, setClick, user_info, fetchLists, handleHeader } ) 
 
         let smoke_data
 
-        if(smoking === 'YES') {
+        if(smoking == "YES") {
             smoke_data = 1
         } else {
             smoke_data = 0
         }
 
-        axios.post('/api/photo/proceed', {photo_id : data.idx, user_id : user_info.user_id, smoking : smoke_data, comment : inputs.comment}, {withCredentials : true}).then(response => {
-            if(response.data === 1) {
+        console.log(smoking);
+        console.log(smoke_data);
+
+
+        axios.post('/api/photo/proceed', {photo_idx : data.idx, user_idx : parseInt(user_info.user_id), smoking : smoke_data, comment : inputs.comment}, 
+                    {"Content-Type" : "application/json", withCredentials : true}).then(response => {
+            if(response.data.suceed === 1) {
                 alert('처리가 완료되었습니다.')
             } else {
                 alert('에러가 발생했습니다.')
             }
-            console.log(response);
+            console.log(response.data);
             fetchLists();
             setIsFinished('');
             setClick();
@@ -93,10 +100,10 @@ function PhotoDetail( { data, setClick, user_info, fetchLists, handleHeader } ) 
     }
 
 
-    const modifyPhoto = () => {
-      
-    }
+    const [show, setShow] = useState(false);
 
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     
     return ( 
      <Container>
@@ -104,7 +111,7 @@ function PhotoDetail( { data, setClick, user_info, fetchLists, handleHeader } ) 
         
             <Col md="auto" className="col"> 
             
-                <Image className="detailImg" src="http://192.168.0.8:3333/images/smoke.png" fluid  rounded/>
+                <Image className="detailImg" src={"http://175.200.110.202:8000/" + data.src} fluid rounded onClick={handleShow}/>
                 <br />
                 <Col md="auto">
 
@@ -146,11 +153,15 @@ function PhotoDetail( { data, setClick, user_info, fetchLists, handleHeader } ) 
                 <Form.Control type="text" placeholder={data.processed_time} readOnly className="inputText" />
 
                 <Form.Label>위반여부</Form.Label>
-                
-                <Form.Control as="select" placeholder={data.smoking} name="smoking" onChange={onChange} className="inputText" > 
+                {!isFinished ?
+                <Form.Control as="select" placeholder={data.smoking} name="smoking" onChange={onChange} className="inputText" readOnly> 
                     <option>YES</option>
                     <option>NO</option>
-                </Form.Control>    
+                </Form.Control>
+                :
+                <Form.Control type="text" placeholder={smoking} readOnly name="smoking" className="inputText"></Form.Control>
+                }
+             
 
                 </Col>
 
@@ -170,7 +181,6 @@ function PhotoDetail( { data, setClick, user_info, fetchLists, handleHeader } ) 
                 {!isFinished ?
                 <Button onClick={proceedPhoto}> 처리하기 </Button>
                 :
-                //<Button onClick={setClick}> 수정하기 </Button>}
                 <div></div>
                 }
                 
@@ -184,6 +194,23 @@ function PhotoDetail( { data, setClick, user_info, fetchLists, handleHeader } ) 
                     
             </Col>
         </Row>
+
+
+            <Modal show={show} onHide={handleClose} size="xl" centered>
+
+                    <Modal.Body>
+                    <Row className="justify-content-md-center">
+
+                        <Image className="imgModal" src={"http://175.200.110.202:8000/" + data.src} fluid rounded onClick={handleShow}/>
+
+                    </Row>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            돌아가기
+                        </Button>
+                    </Modal.Footer>
+            </Modal>
      </Container>
     )
 }

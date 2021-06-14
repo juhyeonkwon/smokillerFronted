@@ -62,7 +62,7 @@ function Signup() {
             default:
                 break;
         }
-
+        
         axios.post('/api/super_user/userInsert', {id : id, name : name, password : password, access : access}, {"Content-Type" : "application/json", withCredentials : true}).then(response => {
             console.log(response.data);
             if(response.data.success === 1) {

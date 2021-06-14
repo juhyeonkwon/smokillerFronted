@@ -39,6 +39,9 @@ function Login( {setLogin} ) {
                     {withCredentials : true}).then(response => {
                         
                     if(response.data.login === "success") {
+                        window.localStorage.setItem("isLogin", true);
+                        window.localStorage.setItem("name", response.data.name);
+                        window.localStorage.setItem("user_id", response.data.idx);
                         setLogin(response.data.name, response.data.idx);      
                     } else {
                         alert("로그인 정보를 다시 확인해 주세요.")

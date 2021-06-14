@@ -29,7 +29,19 @@ import logo from './smokiller.png'
 
 
 function App() {
-  useEffect(()=> {}, []);
+  useEffect(()=> {
+
+    console.log()
+
+    if(window.localStorage.getItem("isLogin") != null) {
+      setStates({
+        isLogin : true,
+        user_id : window.localStorage.getItem("user_id"),
+        name : window.localStorage.getItem("name")
+      })
+    }
+
+  }, []);
   
   //로그인 여부를 확인하기위한 state값입니다... isLogin, user_id, name, email값을 받아와야합니다.
   const [state, setStates]  = useState({ 
@@ -45,13 +57,14 @@ function App() {
   const setLogin = (name, user_id) => {
     setStates({
       isLogin : true,
-      user_id : 1,
+      user_id : user_id,
       name : name
     });
   }
 
   //로그아웃을 하게되면 값들을 초기화
   const logout = () => {
+    window.localStorage.clear();
     setStates({
       isLogin : false,
       user_id : '',

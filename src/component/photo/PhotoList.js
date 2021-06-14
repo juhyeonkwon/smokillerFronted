@@ -116,13 +116,11 @@ function Photolist({ user_info, onClickMenu }) {
     // row를 클릭하면 해당 row의 상세정보를 ajax통신으로 값을 받아와서 사용자에게 보여준다..
     const rowEvents = {
         onClick: (e, row, rowIndex) => {            
-                console.log(row.idx);
-                axios.get('/api/photo/detail?idx=' + row.idx, {withCredentials : true}).then(response => {
-                    console.log(response.data)
+                axios.post('http://58.122.247.48:3333/api/photo/detail', {id : row.idx, process : row.process}).then(response => {
                     setRows({
                         clickedRow : row,
                         isClicked : true,
-                        detailData : response.data.photo
+                        detailData : response.data[0]
                     })
                     
                 }).catch(err => {
